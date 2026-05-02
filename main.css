@@ -480,18 +480,71 @@ body {
     color: #fff;
 }
 
+/* Примерно 355 строка */
 .newsletter-form {
     display: flex;
     border: 1px solid #fff;
     padding: 10px;
     background: #fff;
+    max-width: 100%; /* Добавить это, чтобы не вылезало за экран */
 }
+/* --- Адаптив для первой секции (Hero) --- */
+@media (max-width: 768px) {
+    /* 1. Исправляем шапку (делаем её в колонку и уменьшаем отступы) */
+    .header {
+        flex-direction: column; /* Элементы встанут друг под друга */
+        padding: 15px 20px;     /* Уменьшаем огромные отступы 30px 60px */
+        gap: 10px;              /* Добавляем расстояние между лого, меню и иконками */
+    }
 
+    .nav-group {
+        display: flex;
+        flex-wrap: wrap;        /* Разрешаем перенос ссылок на новую строку */
+        justify-content: center;
+        gap: 5px;
+    }
+
+    .nav-group a {
+        margin: 0 8px;          /* Уменьшаем отступы между ссылками */
+        font-size: 12px;        /* Чуть уменьшаем шрифт */
+    }
+
+    .user-actions {
+        margin-left: 0;         /* Убираем левый отступ, так как мы в колонке */
+        gap: 15px;
+    }
+
+    /* 2. Исправляем главный заголовок (уменьшаем шрифт) */
+    .hero-content h1 {
+        font-size: 28px;        /* Уменьшаем с 48px, чтобы текст влез */
+        line-height: 1.2;       /* Улучшаем читаемость */
+        margin-bottom: 25px;
+        padding: 0 15px;         /* Добавляем боковые отступы, чтобы текст не лип к краю */
+    }
+
+    .hero-content .btn {
+        padding: 15px 30px;      /* Чуть уменьшаем кнопку */
+        font-size: 12px;
+    }
+
+    /* 3. Исправляем блок брендов (разрешаем перенос логотипов) */
+    .brands-section {
+        padding: 15px 10px;
+        flex-wrap: wrap;         /* Логотипы перенесутся, если не влезут */
+    }
+
+    .brands-image {
+        max-height: 50px;       /* Уменьшаем высоту логотипов */
+        margin: 5px;            /* Добавляем отступы вокруг каждого лого */
+    }
+}
+/* Примерно 362 строка */
 .newsletter-form input {
     border: none;
     padding: 10px 20px;
     outline: none;
-    min-width: 250px;
+    min-width: 0; /* Изменить с 250px на 0 или 100%, чтобы сжималось */
+    flex: 1;      /* Добавить это, чтобы инпут занимал всё свободное место */
 }
 
 .newsletter-form button {
@@ -556,4 +609,288 @@ body {
     .footer-grid { grid-template-columns: 1fr 1fr; }
     .newsletter-content { flex-direction: column; gap: 30px; }
     .footer-bottom { flex-direction: column; text-align: center; gap: 10px; }
+}
+
+
+@media (max-width: 768px) {
+    .brands-section {
+        padding: 20px 0;
+    }
+
+    .brands-image {
+        max-height: 40px; /* Уменьшаем логотипы брендов */
+    }
+
+    .categories {
+        padding: 40px 0;
+    }
+
+    .section-header .title {
+        font-size: 24px; /* Размер заголовка в белой секции */
+    }
+}
+@media (max-width: 768px) {
+    .hero {
+        height: 80vh; /* Уменьшаем высоту, как на макете */
+    }
+
+    .hero-content h1 {
+        font-size: 28px; /* Уменьшаем с 48px */
+        line-height: 1.3;
+        margin-bottom: 30px;
+        max-width: 300px; /* Чтобы текст красиво переносился */
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .btn {
+        padding: 15px 30px;
+        font-size: 12px;
+    }
+}
+@media (max-width: 768px) {
+    /* 1. ШАПКА: Логотип слева, бургер справа */
+    .header {
+        display: flex;
+        flex-direction: row;        /* Строго в одну строку */
+        justify-content: space-between; /* Разносим по краям */
+        align-items: center;        /* Центрируем по вертикали */
+        padding: 20px 25px;         /* Боковые отступы как на макете */
+    }
+    .brands-section{
+        display: none;
+    }
+
+    /* Скрываем текстовую навигацию и личный кабинет */
+    .nav-group, .user-actions {
+        display: none !important;
+    }
+
+    /* Логотип: прижимаем к левому краю */
+    .logo {
+        margin: 0;
+        display: block;
+    }
+
+    .logo img {
+        height: 35px; /* Подбери размер, чтобы лого было как на макете */
+        width: auto;
+    }
+
+    /* Бургер: три полоски разной длины */
+    .header__burger {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;      /* Выравниваем полоски по правому краю */
+        gap: 6px;
+        width: 32px;
+        cursor: pointer;
+    }
+
+    .header__burger span,
+    .header__burger::before,
+    .header__burger::after {
+        content: "";
+        height: 2px;
+        background-color: #fff;
+        display: block;
+        transition: 0.3s;
+    }
+
+    .header__burger::before { width: 100%; } /* Верхняя длинная */
+    .header__burger span { width: 70%; }     /* Средняя короче */
+    .header__burger::after { width: 100%; }  /* Нижняя длинная */
+
+    /* 2. ГЛАВНЫЙ ЭКРАН (HERO) */
+    .hero-content h1 {
+        font-size: 28px;
+        line-height: 1.3;
+        margin: 0 auto 35px;
+        max-width: 250px;           /* Перенос текста как в Снимок_3.PNG */
+        font-weight: 700;
+        text-align: center;
+    }
+
+    .hero-content .btn {
+        display: block;
+        width: 100%;
+        max-width: 290px;           /* Кнопка почти на всю ширину текста */
+        margin: 0 auto;
+        border: 1px solid #fff;
+        padding: 18px 0;
+        background-color: transparent;
+    }
+}
+
+
+
+/* Базовое состояние меню — скрыто */
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    left: -100%; /* Спрятано слева */
+    width: 100%;
+    height: 100%;
+    background-color: #1a1a1a;
+    z-index: 1000;
+    padding: 20px 25px;
+    transition: 0.4s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Когда меню активно */
+.mobile-menu.active {
+    left: 0;
+}
+
+.mobile-menu__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.close-menu {
+    font-size: 40px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.mobile-menu__nav {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.mobile-menu__nav a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    font-family: 'Noto Serif', serif;
+}
+
+.mobile-menu__divider {
+    border: 0;
+    border-top: 1px solid rgba(255,255,255,0.2);
+    margin: 30px 0;
+}
+
+.mobile-menu__user {
+    display: flex;
+    gap: 30px;
+    justify-content: flex-start;
+}
+
+.mobile-menu__user img {
+    width: 25px;
+}
+
+.mobile-menu__social {
+    display: flex;
+    gap: 20px;
+    font-size: 20px;
+}
+/* Мобильное меню — фиксированное окно поверх всего */
+.mobile-menu {
+    position: fixed; /* Окно замирает на месте */
+    top: 0;
+    left: -100%;    /* Прячем за левый край экрана */
+    width: 100vw;   /* Ширина на весь экран */
+    height: 100vh;  /* Высота на весь экран */
+    background-color: #1a1a1a;
+    z-index: 9999;  /* Максимальный приоритет, чтобы быть поверх всех */
+    padding: 20px 25px;
+    transition: transform 0.4s ease; /* Плавный выезд */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Когда добавляем класс active через JS — меню выезжает */
+.mobile-menu.active {
+    transform: translateX(100%); /* Двигаем меню в поле зрения */
+}
+
+/* Убираем синий цвет у ссылок в меню */
+.mobile-menu__nav a {
+    color: #fff !important;
+    text-decoration: none;
+    font-size: 18px;
+    display: block;
+    margin-bottom: 20px;
+}
+
+/* Стили для иконок, чтобы они не были синими точками */
+.mobile-menu__social a, 
+.mobile-menu__user a {
+    color: #fff;
+    text-decoration: none;
+}
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    right: 0; /* Или left: 0, смотря откуда выезжает */
+    width: 100%;
+    height: 100%;
+    background: #1a1a1a;
+    z-index: 10000;
+    
+    /* Начальное состояние: полностью прозрачное и сдвинутое */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(100%); 
+    
+    /* Плавность появления */
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Состояние, когда меню открыто */
+.mobile-menu.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+}
+.blog-card-content h3 {
+    font-size: inherit; /* берет размер от родителя */
+    font-weight: inherit;
+    margin: 0;
+    color: #fff;
+    /* Укажите параметры, которые были у <p> в этом блоке ранее */
+}
+html {
+    scroll-behavior: smooth; /* Плавная прокрутка для всех якорей */
+}
+body.menu-open main {
+    filter: blur(4px);
+    transition: filter 0.3s;
+}
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.2); /* Полупрозрачный белый */
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s, background-color 0.3s, opacity 0.2s;
+    z-index: 999;
+    opacity: 0; /* Изначально невидима */
+    visibility: hidden;
+    outline: none;
+}
+
+.back-to-top:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+    transform: scale(1.1); /* Слегка увеличивается при наведении */
+}
+
+.back-to-top.show {
+    visibility: visible;
 }
